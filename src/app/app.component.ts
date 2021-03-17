@@ -8,6 +8,8 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   myCharacteristic: any;
+  backgroundColor = '';
+
   async onButtonClick() {
     let serviceUuid = '6e400001-b5a3-f393-e0a9-e50e24dcca9e';
     let characteristicUuidTx = '6e400002-b5a3-f393-e0a9-e50e24dcca9e';
@@ -17,7 +19,7 @@ export class AppComponent {
     try {
       console.log('Requesting Bluetooth Device...');
       device = await navigator.bluetooth.requestDevice({
-        filters: [{ services: [serviceUuid] }, { name: 'm5-stack' }],
+        filters: [{ services: [serviceUuid] }, { name: 'M5Stack' }],
       });
 
       console.log('Connecting to GATT Server...');
@@ -94,5 +96,17 @@ export class AppComponent {
     const encoder = new TextEncoder();
     const text = 'off';
     await this.myCharacteristic.writeValue(encoder.encode(text));
+  }
+
+  async sendBle(message: string) {
+    console.log(message)
+    const encoder = new TextEncoder();
+    const text = message;
+    await this.myCharacteristic.writeValue(encoder.encode(text));
+  }
+
+  backgroundColorChange(e: any) {
+    console.log(e);
+    this.sendBle('0x'+ e.color.hex.substring(1));
   }
 }

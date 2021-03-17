@@ -1,3 +1,6 @@
 <button mat-raised-button color="primary" (click)="onButtonClick()">Connect</button>
 <button mat-raised-button color="primary" (click)="buttonOn()">On</button>
 <button mat-raised-button color="primary" (click)="buttonOff()">Off</button>
+<div class="picker">
+<color-sketch [color]="backgroundColor" (onChange)="backgroundColorChange($event)"></color-sketch>
+</div>
