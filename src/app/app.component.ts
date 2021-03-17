@@ -42,16 +42,6 @@ export class AppComponent {
         const encoder = new TextEncoder();
         const text = 'on';
         await this.myCharacteristic.writeValue(encoder.encode(text));
-
-        /* await myCharacteristic.startNotifications();
-        myCharacteristic.addEventListener('characteristicvaluechanged', (event) => {
-          const value = event.target.value;
-          const decoder = new TextDecoder('utf-8');
-          console.log(decoder.decode(value));
-        });
-  
-        console.log('Waiting 60 seconds to receive data from the device...')
-        await sleep(600 * 1000); */
       }
 
       console.log('Getting Characteristics...');
@@ -61,15 +51,6 @@ export class AppComponent {
 
       if (characteristicsRx && characteristicsRx.length > 0) {
         const myCharacteristic = characteristicsRx[0];
-
-        /* console.log('Reading Characteristics...');
-        const value = await myCharacteristic.readValue();
-        const decoder = new TextDecoder('utf-8');
-        console.log(decoder.decode(value)); */
-
-        /*       const encoder = new TextEncoder("utf-8");
-        const text = "on";
-        await myCharacteristic.writeValue(encoder.encode(text)); */
 
         await myCharacteristic.startNotifications();
         myCharacteristic.addEventListener(
